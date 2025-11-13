@@ -7,6 +7,14 @@ fun main(){
     var partides: Int?
     var tiradesPerPartida: Int?
 
+    //VARIABLES CREADES NOVES
+    var quantGuanyat = 0
+    var quantPerdut = 0
+    var quantEmpat = 0
+    var guardarTirada = 0
+
+
+
     println(DAUS)
     println("Benvingut/da al joc dels daus.\nPer guanyar cada partida, la suma dels punts de les teves tirades dels teus daus ha de ser superior a la de la CPU")
     println(DAUS)
@@ -15,6 +23,7 @@ fun main(){
     do {
         println("Quantes partides vols jugar? (de 1 a 3)")
         partides = readLine()?.toIntOrNull()
+        guardarTirada++
 
         if (partides != null && (partides < 1 || partides > 3)){
             partides = null
@@ -66,10 +75,21 @@ fun main(){
 
         if (tiradesGuardades[partida][tiradesPerPartida] > acumuladorCPU){
             println("Has guanyat!")
+            quantGuanyat++
         }else if (tiradesGuardades[partida][tiradesPerPartida] < acumuladorCPU){
             println("Has perdut!")
+            quantPerdut++
         }else{
             println("Heu empatat!")
+            quantEmpat++
         }
     }
+
+    val percentGuanyades = quantGuanyat / guardarTirada * 100
+    val percentPedut = quantPerdut / guardarTirada * 100
+    val percentEmpat = quantEmpat / guardarTirada * 100
+
+    println("> PARTIDES GUANYADES: $quantGuanyat VEGADES --> (${percentGuanyades.toInt()}%)")
+    println("> PARTIDES PERDUDES: $quantPerdut VEGADES --> (${percentPedut.toInt()}%)")
+    println("> PARTIDES EMPATADES: $quantEmpat VEGADES --> (${percentEmpat.toInt()}%)")
 }
