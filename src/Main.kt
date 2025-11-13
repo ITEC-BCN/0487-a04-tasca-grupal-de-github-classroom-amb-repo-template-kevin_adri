@@ -42,11 +42,13 @@ fun main(){
         }
     }while(tiradesPerPartida == null)
 
-    // Declarem la matriu
+    // Declarem les matrius
     var tiradesGuardades: Array<IntArray>
+    var tiradesGuardadesCPU: Array<IntArray>
 
-    // Inicialitzem la matriu de partides files i (tiradesPerPartida + 1) columnes
+    // Inicialitzem les matrius de partides files i (tiradesPerPartida + 1) columnes
     tiradesGuardades = Array(partides){IntArray((tiradesPerPartida + 1)) }
+    tiradesGuardadesCPU = Array(partides){IntArray((tiradesPerPartida + 1)) }
 
     // Repetim tantes vegades com partides
     for(partida in 0 until partides) {
@@ -65,13 +67,25 @@ fun main(){
             // Acumulem el sumatori a l'última columna de la fila
             tiradesGuardades[partida][tiradesPerPartida] += tiradaActual
 
+
+        }
+
+        for (tiradaCPU in 0 until tiradesGuardadesCPU[partida].size -1) {
             /** Tirades CPU **/
-            acumuladorCPU += Random.nextInt(1, 6 + 1)
+            println("El CPU tira el dau! (Intent $tiradaCPU)")
+            acumuladorCPU = Random.nextInt(1, 6 + 1)
+            println("El CPU ha tret un ${CARES_DAU[acumuladorCPU-1]}")
+
+            // Guardem la tirada
+            tiradesGuardadesCPU[partida][tiradaCPU] = acumuladorCPU
+
+            // Acumulem el sumatori a l'última columna de la fila
+            tiradesGuardadesCPU[partida][tiradesPerPartida] += acumuladorCPU
         }
 
         println("Partida acabada!")
         println("Tu has aconseguit ${tiradesGuardades[partida][tiradesPerPartida]} punts")
-        println("La CPU ha aconseguit $acumuladorCPU punts")
+        println("La CPU ha aconseguit ${tiradesGuardadesCPU[partida][tiradesPerPartida]} punts")
 
         if (tiradesGuardades[partida][tiradesPerPartida] > acumuladorCPU){
             println("Has guanyat!")
