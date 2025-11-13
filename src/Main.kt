@@ -30,7 +30,7 @@ fun main(){
     do {
         println("Quantes partides vols jugar? (de 1 a 3)")
         partides = readLine()?.toIntOrNull()
-        guardarTirada++
+
 
         if (partides != null && (partides < 1 || partides > 3)){
             partides = null
@@ -59,6 +59,7 @@ fun main(){
 
     // Repetim tantes vegades com partides
     for(partida in 0 until partides) {
+        guardarTirada++
         var acumuladorCPU: Int = 0
         var tiradaActual: Int = 0
 
@@ -107,9 +108,9 @@ fun main(){
         println("\n-------------------------------- \n")
     }
 
-    val percentGuanyades = quantGuanyat / guardarTirada * 100
-    val percentPedut = quantPerdut / guardarTirada * 100
-    val percentEmpat = quantEmpat / guardarTirada * 100
+    val percentGuanyades = quantGuanyat.toDouble() / guardarTirada * 100
+    val percentPedut = quantPerdut.toDouble() / guardarTirada * 100
+    val percentEmpat = quantEmpat.toDouble() / guardarTirada * 100
 
     println("> PARTIDES GUANYADES: $quantGuanyat VEGADES --> (${percentGuanyades.toInt()}%)")
     println("> PARTIDES PERDUDES: $quantPerdut VEGADES --> (${percentPedut.toInt()}%)")
