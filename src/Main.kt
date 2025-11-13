@@ -94,10 +94,10 @@ fun main(){
         println("Tu has aconseguit ${tiradesGuardades[partida][tiradesPerPartida]} punts")
         println("La CPU ha aconseguit ${tiradesGuardadesCPU[partida][tiradesPerPartida]} punts")
 
-        if (tiradesGuardades[partida][tiradesPerPartida] > acumuladorCPU){
+        if (tiradesGuardades[partida][tiradesPerPartida] > tiradesGuardadesCPU[partida][tiradesPerPartida]){
             println("${GREEN}HAS GUANYAT!${RESET} \uD83C\uDFC6")
             quantGuanyat++
-        }else if (tiradesGuardades[partida][tiradesPerPartida] < acumuladorCPU){
+        }else if (tiradesGuardades[partida][tiradesPerPartida] < tiradesGuardadesCPU[partida][tiradesPerPartida]){
             println("${RED}Has perdut per nuv${RESET} \uD83D\uDC7B!" )
             quantPerdut++
         }else{
