@@ -3,6 +3,13 @@ import kotlin.random.Random
 fun main(){
     val DAUS: String = "⚀ ⚁ ⚂ ⚃ ⚄ ⚅"
     val CARES_DAU: Array<String> = arrayOf("⚀", "⚁", "⚂", "⚃", "⚄", "⚅")
+    val RED: String = "\u001b[0;31m"
+    val GREEN: String = "\u001b[0;32m"
+    val RESET: String = "\u001b[0m"
+    val YELLOW: String = "\u001b[0;33m"
+    val PURPLE_BOLD: String = "\u001b[1;35m"
+    val GREEN_BOLD: String = "\u001b[1;32m"
+    val RED_BOLD: String = "\u001b[1;31m"
 
     var partides: Int?
     var tiradesPerPartida: Int?
@@ -55,26 +62,26 @@ fun main(){
         var acumuladorCPU: Int = 0
         var tiradaActual: Int = 0
 
+        println("${GREEN_BOLD}Partida numero ${partida + 1} del usuari@${RESET}")
         for (tirada in 0 until tiradesGuardades[partida].size - 1) {
             /** Tirades persona **/
-            println("Tira el dau! (Intent $tirada)")
+            println("Tira el dau! (Intent ${tirada + 1})")
             tiradaActual = Random.nextInt(1, 6 + 1)
-            println("Has tret un ${CARES_DAU[tiradaActual-1]} !")
+            println("Has tret un ${CARES_DAU[tiradaActual-1]} !\n")
 
             // Guardem la tirada
             tiradesGuardades[partida][tirada] = tiradaActual
 
             // Acumulem el sumatori a l'última columna de la fila
             tiradesGuardades[partida][tiradesPerPartida] += tiradaActual
-
-
         }
 
+        println("${PURPLE_BOLD}Partida numero ${partida + 1} del CPU${RESET}")
         for (tiradaCPU in 0 until tiradesGuardadesCPU[partida].size -1) {
             /** Tirades CPU **/
-            println("El CPU tira el dau! (Intent $tiradaCPU)")
+            println("El CPU tira el dau! (Intent ${tiradaCPU + 1})")
             acumuladorCPU = Random.nextInt(1, 6 + 1)
-            println("El CPU ha tret un ${CARES_DAU[acumuladorCPU-1]}")
+            println("El CPU ha tret un ${CARES_DAU[acumuladorCPU-1]}\n")
 
             // Guardem la tirada
             tiradesGuardadesCPU[partida][tiradaCPU] = acumuladorCPU
@@ -83,20 +90,21 @@ fun main(){
             tiradesGuardadesCPU[partida][tiradesPerPartida] += acumuladorCPU
         }
 
-        println("Partida acabada!")
+        println("${RED_BOLD}PARTIDA ACABADA!${RESET}")
         println("Tu has aconseguit ${tiradesGuardades[partida][tiradesPerPartida]} punts")
         println("La CPU ha aconseguit ${tiradesGuardadesCPU[partida][tiradesPerPartida]} punts")
 
         if (tiradesGuardades[partida][tiradesPerPartida] > acumuladorCPU){
-            println("Has guanyat!")
+            println("${GREEN}HAS GUANYAT!${RESET} \uD83C\uDFC6")
             quantGuanyat++
         }else if (tiradesGuardades[partida][tiradesPerPartida] < acumuladorCPU){
-            println("Has perdut!")
+            println("${RED}Has perdut per nuv${RESET} \uD83D\uDC7B!" )
             quantPerdut++
         }else{
-            println("Heu empatat!")
+            println("${YELLOW}Heu empatat!${RESET}")
             quantEmpat++
         }
+        println("\n-------------------------------- \n")
     }
 
     val percentGuanyades = quantGuanyat / guardarTirada * 100
